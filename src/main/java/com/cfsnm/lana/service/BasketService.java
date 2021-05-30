@@ -81,7 +81,7 @@ public class BasketService implements IBasketService
         int numberOfFreePens = numberOfPens / 2;
         basketPrice =- (numberOfFreePens * ProductType.PEN.getPrice());
         BasketPrice basketPriceRes = new BasketPrice();
-        basketPriceRes.setPrice(basketPrice);
+        basketPriceRes.setPrice(basketPrice + "€");
         return basketPriceRes;
     }
 

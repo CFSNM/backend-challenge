@@ -1,4 +1,4 @@
-package com.cfsnm.lana;
+package com.cfsnm.lana.controller;
 
 import com.cfsnm.lana.model.Basket;
 import com.cfsnm.lana.model.BasketPrice;

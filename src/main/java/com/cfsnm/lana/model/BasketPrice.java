@@ -2,14 +2,14 @@ package com.cfsnm.lana.model;
 
 public class BasketPrice {
 
-    private double price;
+    private String price;
 
-    public double getPrice()
+    public String getPrice()
     {
         return price;
     }
 
-    public void setPrice(double price)
+    public void setPrice(String price)
     {
         this.price = price;
     }
