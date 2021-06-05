@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "b27958be-a3f8-4f79-bd2d-a8108f5ae305",
+		"name": "Lana",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Basket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"mybaskettest\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/baskets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baskets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Basket Price",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/baskets/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baskets",
+						":id"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": null,
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "fe4591a1-e5b7-4223-9f23-055e6aa1bf6d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product To Basket",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productType\": \"PEN\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/baskets/:id/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baskets",
+						":id",
+						"products"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "fe4591a1-e5b7-4223-9f23-055e6aa1bf6d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Basket",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/baskets/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baskets",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "fe4591a1-e5b7-4223-9f23-055e6aa1bf6d"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
