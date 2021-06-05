@@ -28,5 +28,13 @@ public class Product
     public int hashCode() {
         return Objects.hash(productType);
     }
+
+    @Override
+    public String toString()
+    {
+        return "Product{" +
+                "productType=" + productType +
+                '}';
+    }
 }
 

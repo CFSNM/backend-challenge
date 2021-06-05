@@ -1,11 +1,13 @@
 package com.cfsnm.lana.service;
 
+import com.cfsnm.lana.exception.BasketNotFoundException;
 import com.cfsnm.lana.model.Basket;
 import com.cfsnm.lana.model.BasketPrice;
 import com.cfsnm.lana.model.Product;
 import com.cfsnm.lana.model.ProductType;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -27,6 +29,11 @@ public class BasketService implements IBasketService
             }
         }
 
+        if(basket == null)
+        {
+            throw new BasketNotFoundException(basketId);
+        }
+
         return basket;
     }
 
@@ -34,9 +41,10 @@ public class BasketService implements IBasketService
     public Basket createBasket(Basket basket)
     {
         Basket newBasket = new Basket();
-        newBasket.setProducts(basket.getProducts());
         String newUuid = UUID.randomUUID().toString();
         newBasket.setId(newUuid);
+        newBasket.setName(basket.getName() == null ? newUuid : basket.getName());
+        baskets.add(newBasket);
         return newBasket;
     }
 
@@ -45,14 +53,16 @@ public class BasketService implements IBasketService
     {
         Basket basket = getBasketById(basketId);
         List<Product> previousProducts = basket.getProducts();
-        previousProducts.add(product);
-        basket.setProducts(previousProducts);
+        List<Product> newProducts = new LinkedList<>(previousProducts);
+        newProducts.add(product);
+        basket.setProducts(newProducts);
         return basket;
     }
 
     @Override
     public BasketPrice getBasketPrice(String basketId)
     {
+        DecimalFormat df = new DecimalFormat("#.00");
         Basket basket = getBasketById(basketId);
         List<Product> products = basket.getProducts();
         double basketPrice = 0.0;
@@ -70,18 +80,18 @@ public class BasketService implements IBasketService
                     numberOfPens++;
                     break;
             }
-            basketPrice += type.getPrice();
+            basketPrice = basketPrice + type.getPrice();
         }
 
         if(numberOfTShirts >= 3)
         {
-            basketPrice -= (ProductType.TSHIRT.getPrice() * 0.25 * numberOfTShirts);
+            basketPrice = basketPrice - (ProductType.TSHIRT.getPrice() * 0.25 * numberOfTShirts);
         }
 
         int numberOfFreePens = numberOfPens / 2;
-        basketPrice =- (numberOfFreePens * ProductType.PEN.getPrice());
+        basketPrice = basketPrice - (numberOfFreePens * ProductType.PEN.getPrice());
         BasketPrice basketPriceRes = new BasketPrice();
-        basketPriceRes.setPrice(basketPrice + "€");
+        basketPriceRes.setPrice(df.format(basketPrice) + "€");
         return basketPriceRes;
     }
 
