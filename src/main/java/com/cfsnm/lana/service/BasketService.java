@@ -51,6 +51,7 @@ public class BasketService implements IBasketService
     @Override
     public Basket addProductToBasket(String basketId, Product product)
     {
+        ProductType type = product.getProductType();
         Basket basket = getBasketById(basketId);
         List<Product> previousProducts = basket.getProducts();
         List<Product> newProducts = new LinkedList<>(previousProducts);
